@@ -78,41 +78,32 @@ public class FinalProject {
                     }
                     break;
                 case 2:
-                    beliProduk(p2);
+                    sc = new Scanner(System.in);
+                    System.out.println("\n[Beli Produk]");
+                    if(p2 !=null){
+                    System.out.println("Produk yang tersedia: ");
+                    System.out.println(p2.toString());
+                    System.out.print("Jumlah yang ingin dibeli: ");}
+                    int jumlahBeli = sc.nextInt();
+                    if(jumlahBeli > p2.getStok()){
+                        System.out.println("Maaf Stok tidak mencukupi");
+                    }else{
+                        System.out.println("Tidak ada produk yang tersedia untuk dibeli.");
+                    }
                     break;
                 case 3:
-                    lihatTransaksi(transaksiList);
+                    System.out.println("\n[Daftar Transaksi]");
+                    if(!transaksiList.isEmpty()){
+                    for(cTransaksi transaksi : transaksiList){
+                     System.out.println(transaksi.toString());
+                    }
+                     }else{
+                        System.out.println("Belum ada transaksi.");
+                    }
                     break;
                 case 4:
                     System.out.println("Terima Kasih...");
             }
         }while(pilih!=4);
     }
-    
-    public static void beliProduk(cProduk produk){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\n[Beli Produk]");
-        if(produk !=null){
-            System.out.println("Produk yang tersedia: ");
-            System.out.println(produk.toString());
-            System.out.print("Jumlah yang ingin dibeli: ");
-            int jumlahBeli = sc.nextInt();
-            if(jumlahBeli > produk.getStok()){
-                System.out.println("Maaf Stok tidak mencukupi");
-            }
-        }else{
-            System.out.println("Tidak ada produk yang tersedia untuk dibeli.");
-        }
-    }
-    
-    public static void lihatTransaksi(ArrayList<cTransaksi> transaksiList){
-    System.out.println("\n[Daftar Transaksi]");
-    if(!transaksiList.isEmpty()){
-        for(cTransaksi transaksi : transaksiList){
-            System.out.println(transaksi.toString());
-        }
-    }else{
-        System.out.println("Belum ada transaksi.");
-    }
-}
 }    
