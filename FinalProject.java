@@ -17,6 +17,7 @@ public class FinalProject {
             System.out.print("Pilih =");
             pilih=sc.nextInt();
             switch(pilih){
+            //Sub Menu 1 (Produk)    
                 case 1:
                     System.out.println("[Produk]");
                     System.out.println("  1.Tambah");
@@ -35,7 +36,7 @@ public class FinalProject {
                             System.out.print("Stok = ");
                             int st=sc.nextInt();
                             p2 = new cProduk(nm,hg,st);
-                            break;
+                            break;    
                         case 2:
                             System.out.print("  Stok Baru = ");
                             st=sc.nextInt();
@@ -77,6 +78,8 @@ public class FinalProject {
                             else System.out.println("Object Kosong");
                     }
                     break;
+                
+                //Sub Menu 2 (Pembeli)    
                 case 2:
                     sc = new Scanner(System.in);
                     System.out.println("\n[Beli Produk]");
@@ -91,6 +94,8 @@ public class FinalProject {
                         System.out.println("Tidak ada produk yang tersedia untuk dibeli.");
                     }
                     break;
+                    
+                //Sub Menu 3(Transaksi)    
                 case 3:
                     System.out.println("\n[Daftar Transaksi]");
                     if(!transaksiList.isEmpty()){
@@ -101,6 +106,8 @@ public class FinalProject {
                         System.out.println("Belum ada transaksi.");
                     }
                     break;
+                    
+                //Sub Menu 4    
                 case 4:
                     System.out.println("Terima Kasih...");
             }
