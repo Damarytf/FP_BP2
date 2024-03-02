@@ -319,6 +319,7 @@ public class BaksoTrunojoyo {
                 case 4:
                     System.out.println("Terima kasih sudah pesan");
                     System.out.println("Total transaksi: " + totalTransaksi);
+                    break;
             }
             if (pilih == 1) {
                 for (int i = 0; i < MAX_MAKANAN; i++) {
