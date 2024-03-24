@@ -32,21 +32,23 @@ public static void main(String[] args) {
         
         //Main Menu
         do{
-            System.out.println("\nMENU APP");
-            System.out.println("1. Produk");
-            System.out.println("2. Pembeli");
-            System.out.println("3. Transaksi");
-            System.out.println("4. Exit");
+            System.out.println("\n====Bakso Trunojoyo===");
+            System.out.println("| 1. Produk          |");
+            System.out.println("| 2. Pembeli         |");
+            System.out.println("| 3. Transaksi       |");
+            System.out.println("| 4. Exit            |");
+            System.out.println("======================");
             System.out.print("Pilih = ");
             pilih=sc.nextInt();
             switch(pilih){
                 //Menu App(Produk)
                 case 1:
-                    System.out.println("<<Produk>>");
-                    System.out.println("  1. Tambah");
-                    System.out.println("  2. Ubah");
-                    System.out.println("  3. Hapus");
-                    System.out.println("  4. Detail");
+                    System.out.println("=====Produk=====");
+                    System.out.println("|  1. Tambah   |");
+                    System.out.println("|  2. Ubah     |");
+                    System.out.println("|  3. Hapus    |");
+                    System.out.println("|  4. Detail   |");
+                    System.out.println("================");
                     System.out.print("  Pilih = ");
                     int pilih2=sc.nextInt();
                     switch(pilih2){
@@ -106,9 +108,11 @@ public static void main(String[] args) {
                     
                 //Menu App(Pembeli)    
                 case 2:
-                    System.out.println("1. Tambah Pembeli Baru");
-                System.out.println("2. Lihat Daftar Pembeli");
-                System.out.println("3. Hapus Pembeli");
+                System.out.println("==========Pembeli==========");    
+                System.out.println("| 1. Tambah Pembeli Baru  |");
+                System.out.println("| 2. Lihat Daftar Pembeli |");
+                System.out.println("| 3. Hapus Pembeli        |");
+                System.out.println("==========================");
                 System.out.print("Pilih = ");
                 int pilihPembeli = sc.nextInt();
                 switch(pilihPembeli) {
@@ -136,11 +140,12 @@ public static void main(String[] args) {
                 
                 //Menu App(Transaksi)
                 case 3:
-                    System.out.println("<<Transaksi>>");
-                    System.out.println("  1. Tambah");
-                    System.out.println("  2. Ubah");
-                    System.out.println("  3. Hapus");
-                    System.out.println("  4. Cetak");
+                    System.out.println("==Transaksi==");
+                    System.out.println("| 1. Tambah |");
+                    System.out.println("| 2. Ubah   |");
+                    System.out.println("| 3. Hapus  |");
+                    System.out.println("| 4. Cetak  |");
+                    System.out.println("=============");
                     System.out.print("  Pilih = ");
                     pilih2=sc.nextInt();
                     switch(pilih2){
