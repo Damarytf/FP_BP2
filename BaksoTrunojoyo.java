@@ -1,347 +1,266 @@
 package baksotrunojoyo;
 import java.util.Scanner;
-
-//Class Pembeli
-class Pembeli {
-    private String nama;
-    private String nomer;
-
-    Pembeli(String n, String nom) {
-        nama = n;
-        nomer = nom;
-        System.out.println("Pembeli " + nama + " Dibuat...");
-    }
-
-    public void setNama(String n) {
-        nama = n;
-    }
-
-    public void setNomer(String nom) {
-        nomer = nom;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public String getNomer() {
-        return nomer;
-    }
-
-    public String toString() {
-        return nama + "[" + nomer + "]";
-    }
-}
-
-//Class Makanan
-class Makanan {
-    private String namaMakanan;
-    private int hargaMakanan;
-    private int stokMakanan;
-
-    Makanan(String n, int h, int s) {
-        namaMakanan = n;
-        hargaMakanan = h;
-        stokMakanan = s;
-        System.out.println("Menu " + namaMakanan + " diproses..");
-    }
-
-    public void setHargaMakanan(int h) {
-        hargaMakanan = h;
-    }
-
-    public void setStokMakanan(int s) {
-        stokMakanan = s;
-    }
-
-    public String getNamaMakanan() {
-        return namaMakanan;
-    }
-
-    public int getHargaMakanan() {
-        return hargaMakanan;
-    }
-
-    public int getStokMakanan() {
-        return stokMakanan;
-    }
-
-    public void kurangiStokMakanan() {
-        stokMakanan--;
-    }
-
-    public String toString() {
-        return namaMakanan + "[" + hargaMakanan + "]";
-    }
-}
-
-//Class Minuman
-class Minuman {
-    private String namaMinuman;
-    private int hargaMinuman;
-    private int stokMinuman;
-
-    Minuman(String n, int h, int s) {
-        namaMinuman = n;
-        hargaMinuman = h;
-        stokMinuman = s;
-        System.out.println("Menu " + namaMinuman + " diproses");
-    }
-
-    public void setHargaMinuman(int h) {
-        hargaMinuman = h;
-    }
-
-    public String getNamaMinuman() {
-        return namaMinuman;
-    }
-
-    public int getHargaMinuman() {
-        return hargaMinuman;
-    }
-
-    public int getStokMinuman() {
-        return stokMinuman;
-    }
-
-    public void kurangiStokMinuman() {
-        stokMinuman--;
-    }
-
-    public String toString() {
-        return namaMinuman + "[" + hargaMinuman + "]";
-    }
-}
-
 public class BaksoTrunojoyo {
-    public static void main(String[] args) {
+public static void main(String[] args) {
+    cProduk p = new cProduk();
+        cProduk p2 = new cProduk("Sepatu",150000,10);
+        cPembeli pb = new cPembeli("Budi","Surabaya");
+        cProduk produk[] = new cProduk[3];
+        cTransaksi tr = new cTransaksi();
         Scanner sc = new Scanner(System.in);
-        final int MAX_MAKANAN = 8;
-        final int MAX_MINUMAN = 5;
-        Makanan[] daftarMakanan = new Makanan[MAX_MAKANAN];
-        Minuman[] daftarMinuman = new Minuman[MAX_MINUMAN];
-        Pembeli[] daftarPembeli = new Pembeli[7];
-        int totalTransaksi = 0;
-
-        Makanan makan = new Makanan("Tahu", 17000, 10);
-        Minuman minum = new Minuman("EsJeruk", 15000, 15);
-        Pembeli pembeli = new Pembeli("Budi", "5");
-        int pilih = 0, pilih3;
-
-        // Menu Utama
+        produk[0]=new cProduk("Sepatu",150000,5);
+        produk[1]=new cProduk("Sandal",50000,5);
+        produk[2]=new cProduk("Tas",100000,5);
+        int pilih=0;
+        
+        //Fitur Login
+        boolean loggedIn = false;
+        String username, password;
+        System.out.println("=== Login ===");
         do {
-            System.out.println("\n===BAKSO TRUNOJOYO====");
-            System.out.println("|   1.Makanan        |");
-            System.out.println("|   2.Minuman        |");
-            System.out.println("|   3.Pembeli        |");
-            System.out.println("|   4.Selesai        |");
-            System.out.println("======================");
+            System.out.print("Username: ");
+            username = sc.nextLine();
+            System.out.print("Password: ");
+            password = sc.nextLine();
+            if (username.equals("damar") && password.equals("294")) {
+                loggedIn = true;
+                System.out.println("Login berhasil!\n");
+            } else {
+                System.out.println("Username atau password salah. Silakan coba lagi.\n");
+            }
+        } while (!loggedIn);
+        
+        //Main Menu
+        do{
+            System.out.println("\nMENU APP");
+            System.out.println("1. Produk");
+            System.out.println("2. Pembeli");
+            System.out.println("3. Transaksi");
+            System.out.println("4. Exit");
             System.out.print("Pilih = ");
-            pilih = sc.nextInt();
-            switch (pilih) {
-
-                // Sub Menu 1 (Makanan)
+            pilih=sc.nextInt();
+            switch(pilih){
+                //Menu App(Produk)
                 case 1:
-                    pilih3 = 0;
-                    do {
-                        System.out.println("=======Menu Makanan======");
-                        System.out.println("|   1.Buat data Makanan |");
-                        System.out.println("|   2.Lihat Menu        |");
-                        System.out.println("|   3.Ubah data         |");
-                        System.out.println("|   4.Kembali           |");
-                        System.out.println("=========================");
-                        System.out.print("Pilih = ");
-                        pilih3 = sc.nextInt();
-                        switch (pilih3) {
-
-                            // Buat data Makanan
-                            case 1:
-                                for (int i = 0; i < MAX_MAKANAN; i++) {
-                                    if (daftarMakanan[i] == null) {
-                                        System.out.print("Nama Makanan = ");
-                                        String nMakanan = sc.next();
-                                        System.out.print("Harga = ");
-                                        int hMakanan = sc.nextInt();
-                                        System.out.print("Stok = ");
-                                        int sMakanan = sc.nextInt();
-                                        daftarMakanan[i] = new Makanan(nMakanan, hMakanan, sMakanan);
-                                        break;
-                                    }
-                                }
-                                break;
-
-                            // Lihat Menu
-                            case 2:
-                                System.out.println("Daftar Menu Makanan:");
-                                for (int i = 0; i < MAX_MAKANAN; i++) {
-                                    if (daftarMakanan[i] != null) {
-                                        System.out.println(daftarMakanan[i].getNamaMakanan() + ", Harga: " +
-                                                daftarMakanan[i].getHargaMakanan() +
-                                                ", Stok: " + daftarMakanan[i].getStokMakanan());
-                                    }
-                                }
-                                break;
-
-                            // Ubah data
-                            case 3:
-                                System.out.println("Nama Makanan yang ingin diubah = ");
-                                String nbMakanan = sc.next();
-                                for (int i = 0; i < MAX_MAKANAN; i++) {
-                                    if (daftarMakanan[i] != null && daftarMakanan[i].getNamaMakanan().equals(nbMakanan)) {
-                                        System.out.print("Harga Baru makanan = ");
-                                        int hbMakanan = sc.nextInt();
-                                        System.out.println("Stok baru = ");
-                                        int nsMakanan = sc.nextInt();
-                                        daftarMakanan[i].setHargaMakanan(hbMakanan);
-                                        daftarMakanan[i].setStokMakanan(nsMakanan);
-                                        System.out.println("Data makanan berhasil diubah.");
-                                        break;
-                                    }
-                                }
-                                break;
-
-                            // Kembali Menu Utama
-                            case 4:
-                                System.out.println("Kembali ke Menu Utama..");
-                                break;
-                        }
-                    } while (pilih3 != 4);
-                    break;
-
-                // Sub Menu 2(Minuman)
-                case 2:
-                    pilih3 = 0;
-                    do {
-                        System.out.println("=========Minuman=========");
-                        System.out.println("|   1.Buat data Minuman |");
-                        System.out.println("|   2.Lihat data        |");
-                        System.out.println("|   3.Ubah data         |");
-                        System.out.println("|   4.Kembali           |");
-                        System.out.println("=========================");
-                        System.out.print("Pilih = ");
-                        pilih3 = sc.nextInt();
-                        switch (pilih3) {
-
-                            // Buat data Minuman
-                            case 1:
-                                for (int i = 0; i < MAX_MINUMAN; i++) {
-                                    if (daftarMinuman[i] == null) {
-                                        System.out.print("Nama minuman = ");
-                                        String nMinuman = sc.next();
-                                        System.out.print("Harga = ");
-                                        int hMinuman = sc.nextInt();
-                                        System.out.print("Stok = ");
-                                        int sMinuman = sc.nextInt();
-                                        daftarMinuman[i] = new Minuman(nMinuman, hMinuman, sMinuman);
-                                        break;
-                                    }
-                                }
-                                break;
-
-                            // Lihat Menu Minuman
-                            case 2:
-                                System.out.println("Daftar Menu Minuman:");
-                                for (int i = 0; i < MAX_MINUMAN; i++) {
-                                    if (daftarMinuman[i] != null) {
-                                        System.out.println(daftarMinuman[i].getNamaMinuman() + ", Harga: " +
-                                                daftarMinuman[i].getHargaMinuman() +
-                                                ", Stok: " + daftarMinuman[i].getStokMinuman());
-                                    }
-                                }
-                                break;
-
-                            // Ubah data
-                            case 3:
-                                System.out.print("Nama Minuman yang ingin diubah = ");
-                                String nbMinuman = sc.next();
-                                for (int i = 0; i < MAX_MINUMAN; i++) {
-                                    if (daftarMinuman[i] != null && daftarMinuman[i].getNamaMinuman().equals(nbMinuman)) {
-                                        System.out.print("Harga baru = ");
-                                        int hbMinuman = sc.nextInt();
-                                        daftarMinuman[i].setHargaMinuman(hbMinuman);
-                                        System.out.println("Data minuman berhasil diubah.");
-                                        break;
-                                    }
-                                }
-                                break;
-
-                            // Kembali Ke Menu Utama
-                            case 4:
-                                System.out.println("Kembali ke menu utama");
-                                break;
-                        }
-                    } while (pilih3 != 4);
-                    break;
-
-                // Sub Menu Pembeli
-                case 3:
-                    System.out.println("=========Pembeli=========");
-                    System.out.println("|   1.Buat data Pembeli |");
-                    System.out.println("|   2.Lihat data        |");
-                    System.out.println("|   3.Ubah data         |");
-                    System.out.println("|   4.Kembali           |");
-                    System.out.println("=========================");
-                    System.out.print("Pilih = ");
-                    int pilihPembeli = sc.nextInt();
-                    switch (pilihPembeli) {
-
-                        // Buat data Pembeli
+                    System.out.println("<<Produk>>");
+                    System.out.println("  1. Tambah");
+                    System.out.println("  2. Ubah");
+                    System.out.println("  3. Hapus");
+                    System.out.println("  4. Detail");
+                    System.out.print("  Pilih = ");
+                    int pilih2=sc.nextInt();
+                    switch(pilih2){
                         case 1:
-                            System.out.print("Nama Pembeli = ");
-                            String namaPembeli = sc.next();
-                            System.out.print("Nomer Pembeli = ");
-                            String nomorPembeli = sc.next();
-                            pembeli = new Pembeli(namaPembeli, nomorPembeli);
+                            sc=new Scanner(System.in);
+                            System.out.print("  Nama = ");
+                            String nm=sc.nextLine();
+                            System.out.print("  Harga = ");
+                            int hg=sc.nextInt();
+                            System.out.print("  Stok = ");
+                            int st=sc.nextInt();
+                            p2 = new cProduk(nm,hg,st);
                             break;
-
-                        // Lihat data pembeli
                         case 2:
-                            String p = pembeli.toString();
-                            System.out.println("Pembeli: " + p);
+                            System.out.print("  Stok Baru = ");
+                            st = sc.nextInt();
+                            System.out.println("  Yakin ubah?");
+                            System.out.println("  1. Ya");
+                            System.out.println("  2. Batal");
+                            System.out.print("  Jawab = ");
+                            int jwb = sc.nextInt();
+                            if(jwb == 1) {
+                                p2.setStok(st);
+                                System.out.println("  Ubah stok berhasil!");
+                            } else {
+                                System.out.println("  Ubah stok batal!");
+                            }
                             break;
-
-                        // Ubah Data Pembeli
                         case 3:
-                            System.out.print("Nama Baru pembeli: ");
-                            String nb = sc.next();
-                            pembeli.setNama(nb);
-                            System.out.print("Nomer Baru pembeli: ");
-                            String nn = sc.next();
-                            pembeli.setNomer(nn);
+                            System.out.println("  Nama = ");
+                            nm=sc.next();
+                            if(nm.equalsIgnoreCase(p2.getNama())){
+                                System.out.println("Yakin hapus?");
+                                System.out.println("1. Ya");
+                                System.out.println("2. Tidak");
+                                System.out.print("Jawab = ");
+                                jwb=sc.nextInt();
+                                if(jwb==1){
+                                    p2=null;
+                                    System.out.println("Hapus Sukses..");
+                                }
+                                else{
+                                    System.out.println("Batal Hapus!");
+                                }
+                            }else{
+                                System.out.println("Produk tidak ada!");
+                            }
                             break;
-
-                        // Kembali Ke Menu Utama
                         case 4:
-                            System.out.println("Kembali ke menu utama");
+                            if(p2 != null)
+                                System.out.println(p2.toString()); 
+                            else 
+                                System.out.println("Objek Kosong!");
                             break;
                     }
                     break;
-                case 4:
-                    System.out.println("Terima kasih sudah pesan");
-                    System.out.println("Total transaksi: " + totalTransaksi);
-                    break;
-            }
-            if (pilih == 1) {
-                for (int i = 0; i < MAX_MAKANAN; i++) {
-                    if (daftarMakanan[i] != null) {
-                        daftarMakanan[i].kurangiStokMakanan();
-                        totalTransaksi += daftarMakanan[i].getHargaMakanan();
+                    
+                //Menu App(Pembeli)    
+                case 2:
+                    System.out.println("1. Tambah Pembeli Baru");
+                System.out.println("2. Lihat Daftar Pembeli");
+                System.out.println("3. Hapus Pembeli");
+                System.out.print("Pilih = ");
+                int pilihPembeli = sc.nextInt();
+                switch(pilihPembeli) {
+                    case 1:
+                        System.out.print("Masukkan Nama Pembeli: ");
+                        String namaPembeli = sc.next();
+                        System.out.print("Masukkan Alamat Pembeli: ");
+                        String alamatPembeli = sc.next();
+                        cPembeli pembeliBaru = new cPembeli(namaPembeli, alamatPembeli);
+                        System.out.println("Pembeli berhasil ditambahkan!");
                         break;
-                    }
-                }
-            } else if (pilih == 2) {
-                for (int i = 0; i < MAX_MINUMAN; i++) {
-                    if (daftarMinuman[i] != null) {
-                        daftarMinuman[i].kurangiStokMinuman();
-                        totalTransaksi += daftarMinuman[i].getHargaMinuman();
+                    case 2:
+                        System.out.println("Daftar Pembeli:");
                         break;
-                    }
+                    case 3:
+                        System.out.print("Masukkan Nama Pembeli yang Akan Dihapus: ");
+                        String namaPembeliHapus = sc.next();
+                        System.out.println("Pembeli berhasil dihapus!");
+                        break;
+                    default:
+                        System.out.println("Pilihan tidak valid!");
+                        break;
                 }
-            }
-        } while (pilih != 4);
-    }
-}
-
+                break;
+                
+                //Menu App(Transaksi)
+                case 3:
+                    System.out.println("<<Transaksi>>");
+                    System.out.println("  1. Tambah");
+                    System.out.println("  2. Ubah");
+                    System.out.println("  3. Hapus");
+                    System.out.println("  4. Cetak");
+                    System.out.print("  Pilih = ");
+                    pilih2=sc.nextInt();
+                    switch(pilih2){
+                        case 1:
+                            System.out.print("Nama = ");
+                            String n = sc.next();
+                            pb = new cPembeli(n);
+                            tr.setPembeli(pb);
+                            String pr;
+                            int j = 0, pilih3=0;
+                            do{
+                                System.out.println("Produk");
+                                System.out.println("1. Sepatu");
+                                System.out.println("2. Sandal");
+                                System.out.println("3. Tas");
+                                System.out.println("4. Selesai");
+                                System.out.print("Pilih = ");
+                                pilih3=sc.nextInt();
+                                switch(pilih3) {
+                                    case 1:
+                                        System.out.println("Jumlah = ");
+                                            if (sc.hasNextInt()) {
+                                                j = sc.nextInt();
+                                                if (j > 0 && j <= produk[0].getStok()) {
+                                                    tr.tambahProduk(produk[0], j);
+                                                    System.out.println("Tambah sukses!");
+                                                } else {
+                                                    System.out.println("Jumlah tidak valid atau melebihi stok yang tersedia!");
+                                                }
+                                            } else {
+                                                System.out.println("Input tidak valid!");
+                                                sc.next(); // Mengonsumsi input yang tidak valid agar tidak terjebak dalam loop
+                                            }
+                                            break;
+                                    case 2:
+                                        if (produk.length > 1 && produk[1] != null) {
+                                            tr.tambahProduk(p, j);
+                                            System.out.println("Tambah sukses!");
+                                        } else {
+                                            System.out.println("Produk tidak tersedia atau tidak valid!");
+                                        }
+                                        break;
+                                    case 3:
+                                        if (produk.length > 2 && produk[2] != null) {
+                                        tr.tambahProduk(p, j);
+                                        System.out.println("Tambah sukses!");
+                                    } else {
+                                        System.out.println("Produk tidak tersedia atau tidak valid!");
+                                    }
+                                    break;
+                                    case 4:
+                                        System.out.println("Kembali..");
+                                }
+                            }while(pilih3!=4);
+                            
+                            /*
+                            System.out.print("Produk = ");
+                            String pr = sc.next();
+                            System.out.print("Jumlah = ");
+                            int j = sc.nextInt();
+                            if(pr.equalsIgnoreCase(p2.getNama())){
+                                int t = j*p2.getharga();
                                 
+                                tr.setProduk(p2);
+                                tr.setJumlah(j);
+                                tr.setTotal(t);
+                                System.out.println("Transaksi sukses..");
+                            }
+                            else{
+                                System.out.println("Produk tidak ada!");
+                            }
+                            */
+                            break;
 
-
+                        case 2:
+                            System.out.println("Nama Produk = ");
+                            pr=sc.next();
+                            for(int i = 0; i < tr.getidxprd(); i++) {
+                                if(pr.equalsIgnoreCase(tr.getProduk()[i].getNama())){
+                                    System.out.println("Jumlah Baru = ");
+                                    j = sc.nextInt();
+                                    System.out.println("Yakin Ubah?");
+                                    System.out.println("1.Ya\n2.Batal");
+                                    System.out.print("Jawab = ");
+                                    int jwb=sc.nextInt();
+                                    if(jwb==1){
+                                        tr.setJumlah(j);
+                                        tr.setTotal(j*tr.getProduk()[i].getHarga());
+                                        System.out.println("Ubah sukses...");
+                                        break;
+                                    }
+                                    else System.out.println("Ubah batal!");
+                                    break;
+                                }
+                                else System.out.println("Produk tidak ada!");
+                            }    
+                            break;
+                        case 3:
+                            System.out.println("Nama Produk = ");
+                            pr=sc.next();
+                            tr.hapusProduk(pr);
+                            break;
+                        case 4:
+                            if(tr!=null){
+                                System.out.println("Pembeli : "+tr.getPembeli().getNama());
+                                tr.lihatTransaksi();
+                                //System.out.println("Produk : "+tr.getProduk().getNama());
+                                //System.out.println("Jumlah : "+tr.getJumlah());
+                                //System.out.println("Harga : "+tr.getProduk().getharga());
+                                //System.out.println("Total : "+tr.getTotal());
+                            }
+                            else System.out.println("Transaksi Kosong!");
+                    }
+                    break;
+                    
+                //Menu App(Exit)    
+                case 4:
+                    System.out.println("Terima Kasih..");
+            }
+        }while(pilih!=4);
+    }
+    
+}
