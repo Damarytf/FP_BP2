@@ -8,9 +8,9 @@ public static void main(String[] args) {
         cProduk produk[] = new cProduk[3];
         cTransaksi tr = new cTransaksi();
         Scanner sc = new Scanner(System.in);
-        produk[0]=new cProduk("Sepatu",150000,5);
-        produk[1]=new cProduk("Sandal",50000,5);
-        produk[2]=new cProduk("Tas",100000,5);
+        produk[0]=new cProduk("Pentolhalus",150000,5);
+        produk[1]=new cProduk("Pentolkasar",50000,5);
+        produk[2]=new cProduk("Siomay",100000,5);
         int pilih=0;
         
         //Fitur Login
